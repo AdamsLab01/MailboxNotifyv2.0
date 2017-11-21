@@ -12,8 +12,8 @@ be used to wake the MCU, like on the Arduino class of MCUs.
 So, I used the ATTiny85 to monitor the delivery/retrieval status, control the notification LEDs, and to reset the ESP8266 when required. The ESP8266 is relegated to the task of reading the 
 sensors (battery level, temperature, date/time) and sending the delivery notification email.
 
-The entire setup, including solar charge controller, uses only 0.2mA when sleeping. At its most active (WiFi is in use) the system peaks at 126mA, but this is very brief. When the system is 
-sleeping, but the notification LEDs are on, usage is 48.5mA. 
+The entire setup, including solar charge controller, uses only 0.4mA when sleeping. At its most active (WiFi is in use) the system peaks at 126mA, but this is very brief. When the system is 
+sleeping, but the notification LEDs are on, usage is 48.7mA. 
 
 In my setup I have the space for, and am using a 4400mAh LiPo battery which is recharged via solar. Even at its peek usage (126mA), the system would run on this cell for +/-24 hours. I 
 actually didn't have to be so fussy with minimizing power usage but it was a fun and informative exercise.
@@ -40,6 +40,9 @@ void setup() {
   pinMode(LEDrelay, OUTPUT);
   pinMode(ESPrelay, OUTPUT);
   pinMode(DomeLED, OUTPUT); 
+  
+  digitalWrite(DeliverySW, HIGH); // Enable the internal pull-up.
+  digitalWrite(RetrieveSW, HIGH); // Enable the internal pull-up.
   
   PCMSK  |= bit (PCINT0);  // Enable D0, PIN0 for interrupt.
   PCMSK  |= bit (PCINT1);  // Enable D1, PIN1 for interrupt.
@@ -70,15 +73,9 @@ void F_Sleep() {
 
   sleep_enable();
 
-  digitalWrite(DeliverySW, LOW); // Disable the internal pull-up when sleeping to save power [this saves ~0.27mA]. 
-  digitalWrite(RetrieveSW, LOW); // Disable the internal pull-up when sleeping to save power [this saves ~0.27mA] .
-
   sleep_cpu(); // Sleep.
 
   sleep_disable(); // We resume from here when woken up.
-
-  digitalWrite(DeliverySW, HIGH); // Enable the internal pull-up after waking up.
-  digitalWrite(RetrieveSW, HIGH); // Enable the internal pull-up after waking up.
 
   power_all_enable(); // Turn the the ADC, timer 0 and 1, and serial interface back on.
 

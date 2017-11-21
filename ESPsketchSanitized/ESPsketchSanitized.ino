@@ -14,8 +14,8 @@ In testing I found that the ESP8266 has issues re-connecting to wifi after wakin
 wifi - WiFi.disconnect(); - and then reconnects when necessary. Also, the ESP8266 connects a tiny bit faster when you give it a static IP, vs. waiting for a DHCP lease. A static IP may not be
 suable for all environments, however. 
 
-The entire setup, including solar charge controller, uses only 0.2mA when sleeping. At its most active (WiFi is in use) the system peaks at 126mA, but this is very brief. When the system is 
-sleeping, but the notification LEDs are on, usage is 48.5mA.
+The entire setup, including solar charge controller, uses only 0.4mA when sleeping. At its most active (WiFi is in use) the system peaks at 126mA, but this is very brief. When the system is 
+sleeping, but the notification LEDs are on, usage is 48.7mA.
 
 The ADC in the ESP8266 is tricky (inaccurate?) which is why I map the reading - BatteryPINreading = map(BatteryPINreading, 0, 934, 0, 100); - to 934 to reflect a full battery, rather than 
 closer to the 1023 it should be given that I'm feeding it near the 1v max input. On the Adafruit ESP8266 Huzzah the readings were even more off. This seems to be a known issue with the 
