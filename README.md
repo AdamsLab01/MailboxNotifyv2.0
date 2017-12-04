@@ -12,7 +12,7 @@ Also, the ESP8266 can only be woken up from deepSleep by a watchdog timer (not u
 
 So, I used the ATTiny85 to monitor the delivery/retrieval status, control the notification LEDs, and to reset the ESP8266 when required. The ESP8266 is relegated to the task of reading the sensors (battery level, temperature, date/time) and sending the delivery notification email.
 
-The entire setup, including solar charge controller, uses only 0.2mA when sleeping. At its most active (WiFi is in use) the system peaks at 126mA, but this is very brief. When the system is sleeping, but the notification LEDs are on, usage is 48.5mA. 
+The entire setup, including solar charge controller, uses only 0.4mA when sleeping. At its most active (WiFi is in use) the system peaks at 126mA, but this is very brief. When the system is sleeping, but the notification LEDs are on, usage is 48.7mA.
 
 In my setup I have the space for, and am using a 4400mAh LiPo battery which is recharged via solar. Even at its peek usage (126mA), the system would run on this cell for +/-24 hours. 
 
