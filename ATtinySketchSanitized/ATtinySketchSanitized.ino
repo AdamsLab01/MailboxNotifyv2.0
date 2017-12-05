@@ -1,15 +1,15 @@
 /*
-This is the code for the ATTiny85 portion of my v2.0 mailbox delivery notification system. 
+This is the code for the ATtiny85 portion of my v2.0 mailbox delivery notification system. 
 
-The ATTiny85 was incorporated into the system to control the notification LEDs on the mailbox and to reset (i.e. wake up) the ESP8266 so it would run its email delivery routine.
+The ATtiny85 was incorporated into the system to control the notification LEDs on the mailbox and to reset (i.e. wake up) the ESP8266 so it would run its email delivery routine.
 
-The ESP8266 is capable of all the functions the ATTiny85 is preforming except that you cannot set a PIN state to HIGH and have it remain HIGH while the ESP8266 is in deepSleep. This is 
+The ESP8266 is capable of all the functions the ATtiny85 is preforming except that you cannot set a PIN state to HIGH and have it remain HIGH while the ESP8266 is in deepSleep. This is 
 untenable because I want to turn on the mailbox notification LEDs and then put the MCU back to sleep to save power. 
 
 Also, the ESP8266 can only be woken up from deepSleep by a watchdog timer (not usable for this purpose) or by reseting the MCU. When in deepSleep there are no external interrupts that can 
 be used to wake the MCU, like on the Arduino class of MCUs.
 
-So, I used the ATTiny85 to monitor the delivery/retrieval status, control the notification LEDs, and to reset the ESP8266 when required. The ESP8266 is relegated to the task of reading the 
+So, I used the ATtiny85 to monitor the delivery/retrieval status, control the notification LEDs, and to reset the ESP8266 when required. The ESP8266 is relegated to the task of reading the 
 sensors (battery level, temperature, date/time) and sending the delivery notification email.
 
 The entire setup, including solar charge controller, uses only 0.4mA when sleeping. At its most active (WiFi is in use) the system peaks at 126mA, but this is very brief. When the system is 

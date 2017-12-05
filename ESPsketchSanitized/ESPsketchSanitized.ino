@@ -8,7 +8,7 @@ The ESP8266 (a Sparkfun ESP8266 Thing Dev in my case) is used to get sensor read
 I didn't want to rely on external services to send notifications. After much finagling, I found that using my own internal SMTP server (Postfix, not publicly exposed, it relays through Gmail) was the simplest. If you've ever sent an email by telnetting into an SMTP server, this will look familiar to you. 
 
 All functionality occurs during setup, the Loop is empty. After running the necessary functions to read sensors, connect to wifi, and send the email, the ESP8266 goes into deepSleep 
-indefinitely. It's woken up by a reset preformed by an (external) ATTiny85.
+indefinitely. It's woken up by a reset preformed by an ATtiny85.
 
 In testing I found that the ESP8266 has issues re-connecting to wifi after waking up (i.e. being reset). To remedy this, when the ESP8266 wakes up it immediately disconnects from 
 wifi - WiFi.disconnect(); - and then reconnects when necessary. Also, the ESP8266 connects a tiny bit faster when you give it a static IP, vs. waiting for a DHCP lease. A static IP may not be
