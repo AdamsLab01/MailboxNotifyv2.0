@@ -1,6 +1,6 @@
 # MailboxNotifiyv2.0
 
-For more see: https://adambyers.com/2017/11/mailbox-notifier-v2-0
+For more see: https://adamslab.io/projects/2018/11/25/mailbox-notifier-v20
 
 This is the code my mailbox delivery notification system. 
 
